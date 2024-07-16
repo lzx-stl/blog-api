@@ -34,6 +34,9 @@ public class ArticleServiceImpl implements ArticleService {
         Long tagId = articlePageReq.getTagId();
         Page<Article> page = new Page<>(curr, limit);
         LambdaQueryWrapper<Article> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+//        过滤 article_content 字段
+        lambdaQueryWrapper.select(Article.class, i -> !i.getProperty().equals("articleContent"));
+
         if(articlePageReq.getState() != null)
             lambdaQueryWrapper.eq(Article::getState, state);
         if(!keyword.equals("")) lambdaQueryWrapper.like(Article::getTitle, keyword);

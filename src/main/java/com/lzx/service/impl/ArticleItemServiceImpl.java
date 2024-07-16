@@ -34,7 +34,6 @@ public class ArticleItemServiceImpl implements ArticleItemService {
         List<Article> articleList = page.getRecords();
         List<ArticleItem> list = new ArrayList<>();
         for (Article article : articleList) {
-            article.setArticleContent(null);
             list.add(new ArticleItem(article.getArticleId(),
                     article,
                     articleTagService.selectTagsByArticleId(article.getArticleId())));
